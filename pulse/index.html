@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Colégio Municipal Faustino Dias Lima — Ponto</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="brand">Colégio Municipal<br/><strong>Faustino Dias Lima</strong></div>
+  </header>
+
+  <main class="container">
+    <section class="clock-card">
+      <div class="date" id="date">--/--/----</div>
+      <div class="time" id="time">--:--:--</div>
+    </section>
+
+    <section class="auth-card">
+      <label class="label">Senha de 4 dígitos</label>
+      <div class="pin-inputs" id="pinInputs">
+        <input inputmode="numeric" pattern="[0-9]*" maxlength="1" class="pin" />
+        <input inputmode="numeric" pattern="[0-9]*" maxlength="1" class="pin" />
+        <input inputmode="numeric" pattern="[0-9]*" maxlength="1" class="pin" />
+        <input inputmode="numeric" pattern="[0-9]*" maxlength="1" class="pin" />
+      </div>
+      <button id="submitBtn" class="btn">Bater Ponto</button>
+      <div id="message" class="message" aria-live="polite"></div>
+    </section>
+
+    <section class="history-card">
+      <h3>Histórico (local)</h3>
+      <ul id="historyList" class="history-list"></ul>
+      <button id="exportBtn" class="btn secondary">Exportar CSV</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
