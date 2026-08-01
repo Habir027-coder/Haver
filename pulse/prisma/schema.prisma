@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL", "file:./dev.db")
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  name      String
+  role      String  @default("employee")
+  pinHash   String
+  createdAt DateTime @default(now())
+  punches   Punch[]
+}
+
+model Punch {
+  id        Int     @id @default(autoincrement())
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
+  type      String  @default("Ponto")
+  timestamp DateTime @default(now())
+}
