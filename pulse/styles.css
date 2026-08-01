@@ -1,0 +1,61 @@
+:root{
+  --blue:#0b5ed7;
+  --white:#ffffff;
+  --yellow:#ffcc00;
+  --muted:#f4f7fb;
+  --text:#08304a;
+  font-size:16px;
+}
+
+*{box-sizing:border-box;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
+body{
+  margin:0;background:var(--muted);color:var(--text);min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;padding:24px;
+}
+
+/* Header */
+.header{
+  width:100%;max-width:980px;background:linear-gradient(90deg,var(--blue),#0a66d1);
+  color:var(--white);padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(11,94,215,.12);
+  margin-bottom:20px;
+}
+.brand{font-weight:600;font-size:20px;line-height:1.05}
+.brand strong{font-size:22px}
+
+/* Main container */
+.container{width:100%;max-width:980px;display:grid;grid-template-columns:1fr 360px;gap:18px}
+@media(max-width:860px){.container{grid-template-columns:1fr;}}
+.card{background:var(--white);padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(8,48,74,.06)}
+
+/* Clock card */
+.clock-card{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:22px}
+.date{font-size:18px;color:#0a3a6e}
+.time{font-size:48px;font-weight:700;color:var(--blue)}
+
+/* Auth card */
+.auth-card{display:flex;flex-direction:column;gap:10px;padding:18px;align-items:flex-start}
+.label{font-size:14px;color:#456;}
+
+/* PIN inputs */
+.pin-inputs{display:flex;gap:10px}
+.pin{width:56px;height:56px;border-radius:8px;border:2px solid #e6eef9;text-align:center;font-size:28px;
+  background:linear-gradient(180deg,var(--white),#f7fbff);outline:none}
+.pin:focus{border-color:var(--blue);box-shadow:0 4px 12px rgba(11,94,215,.12)}
+
+/* Buttons */
+.btn{background:var(--blue);color:var(--white);border:none;padding:10px 14px;border-radius:8px;font-weight:600;cursor:pointer}
+.btn.secondary{background:transparent;color:var(--blue);border:2px solid var(--blue)}
+.btn:active{transform:translateY(1px)}
+
+/* Message */
+.message{min-height:24px;color:#0b5;text-align:left}
+
+/* History */
+.history-card{grid-column:1 / -1;padding:18px;display:flex;flex-direction:column;gap:10px}
+.history-list{list-style:none;padding:0;margin:0;max-height:240px;overflow:auto;border-radius:6px;border:1px dashed #e6eef9}
+.history-list li{padding:8px 12px;border-bottom:1px solid #f1f6fb;display:flex;justify-content:space-between}
+.history-list li:last-child{border-bottom:none}
+.small{font-size:13px;color:#466}
+
+/* Accent */
+.accent-badge{background:var(--yellow);color:#123;padding:6px 10px;border-radius:6px;font-weight:700}
