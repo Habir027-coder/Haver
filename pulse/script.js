@@ -4,8 +4,8 @@ function updateClock(){
   const now = new Date();
   const dateEl = document.getElementById('date');
   const timeEl = document.getElementById('time');
-  dateEl.textContent = pad(now.getDate()) + '/' + pad(now.getMonth()+1) + '/' + now.getFullYear();
-  timeEl.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+  if (dateEl) dateEl.textContent = pad(now.getDate()) + '/' + pad(now.getMonth()+1) + '/' + now.getFullYear();
+  if (timeEl) timeEl.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
 }
 setInterval(updateClock, 500);
 updateClock();
@@ -59,7 +59,7 @@ async function submitPin(){
 
   // Tenta enviar ao backend; se falhar, salva localmente
   try{
-    const res = await fetch('/pulse/api/punch', {
+    const res = await fetch('/api/punch', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({ pin })
