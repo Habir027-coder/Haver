@@ -8,7 +8,8 @@
     "start": "next start",
     "prisma": "prisma",
     "migrate:dev": "prisma migrate dev --name init",
-    "seed": "node prisma/seed.js"
+    "seed": "node prisma/seed.js",
+    "create-admin": "node prisma/create-admin.js"
   },
   "dependencies": {
     "next": "13.4.8",
