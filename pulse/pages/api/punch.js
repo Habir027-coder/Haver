@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import prisma from '../../pulse/lib/prisma';
+import { verifyToken, parseTokenCookie } from '../../pulse/lib/auth';
 
 export default async function handler(req, res){
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -12,6 +13,7 @@ export default async function handler(req, res){
     const users = await prisma.user.findMany();
     let found = null;
     for (const u of users){
+      if (!u.pinHash) continue;
       const match = await bcrypt.compare(pin, u.pinHash);
       if (match){ found = u; break; }
     }

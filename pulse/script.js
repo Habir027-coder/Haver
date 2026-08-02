@@ -48,7 +48,7 @@ renderHistory();
 
 // Submeter PIN
 function getPinValue(){ return pins.map(i=>i.value||'').join('') }
-function submitPin(){
+async function submitPin(){
   const pin = getPinValue();
   const message = document.getElementById('message');
   if (!/^\d{4}$/.test(pin)){
@@ -56,17 +56,41 @@ function submitPin(){
     message.style.color = '#d33';
     return;
   }
-  const now = new Date();
-  const rec = { pin: pin, timestamp: now.toISOString(), type: 'Ponto' };
-  const arr = loadRecords();
-  arr.push(rec);
-  saveRecords(arr);
-  renderHistory();
-  message.textContent = 'Ponto registrado com sucesso às ' + now.toLocaleTimeString();
-  message.style.color = '#0a6';
-  // limpa inputs
+
+  // Tenta enviar ao backend; se falhar, salva localmente
+  try{
+    const res = await fetch('/pulse/api/punch', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ pin })
+    });
+    if (res.ok){
+      const d = await res.json();
+      message.textContent = 'Ponto registrado com sucesso às ' + new Date(d.punch.timestamp).toLocaleTimeString();
+      message.style.color = '#0a6';
+      // também guarda local para histórico local
+      const arr = loadRecords(); arr.push({ pin, timestamp: d.punch.timestamp, type: 'Ponto' }); saveRecords(arr); renderHistory();
+    }else{
+      // fallback para local
+      const text = await res.text();
+      console.warn('API falhou', text);
+      fallbackSave(pin, message);
+    }
+  }catch(e){
+    console.warn('erro fetch', e);
+    fallbackSave(pin, message);
+  }
+
   pins.forEach(i=>i.value='');
   pins[0].focus();
+}
+
+function fallbackSave(pin, message){
+  const now = new Date();
+  const rec = { pin: pin, timestamp: now.toISOString(), type: 'Ponto' };
+  const arr = loadRecords(); arr.push(rec); saveRecords(arr); renderHistory();
+  message.textContent = 'Ponto registrado localmente às ' + new Date(rec.timestamp).toLocaleTimeString();
+  message.style.color = '#0a6';
 }
 
 // Export CSV

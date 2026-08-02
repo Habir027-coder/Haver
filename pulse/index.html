@@ -12,12 +12,12 @@
   </header>
 
   <main class="container">
-    <section class="clock-card">
+    <section class="clock-card card">
       <div class="date" id="date">--/--/----</div>
       <div class="time" id="time">--:--:--</div>
     </section>
 
-    <section class="auth-card">
+    <section class="auth-card card">
       <label class="label">Senha de 4 dígitos</label>
       <div class="pin-inputs" id="pinInputs">
         <input inputmode="numeric" pattern="[0-9]*" maxlength="1" class="pin" />
@@ -29,7 +29,7 @@
       <div id="message" class="message" aria-live="polite"></div>
     </section>
 
-    <section class="history-card">
+    <section class="history-card card">
       <h3>Histórico (local)</h3>
       <ul id="historyList" class="history-list"></ul>
       <button id="exportBtn" class="btn secondary">Exportar CSV</button>
